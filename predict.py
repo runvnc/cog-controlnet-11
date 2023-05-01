@@ -129,6 +129,10 @@ class Predictor(BasePredictor):
                     le=255
                 ),
                 ) -> List[Path]:
+        if seed == -1:
+            seed = random.randint(0, 65535)
+        seed_everything(seed)
+
         image = np.array(Image.open(image))
         image = HWC3(image)
         img = resize_image(image, image_resolution)
@@ -144,10 +148,6 @@ class Predictor(BasePredictor):
         control = torch.from_numpy(detected_map.copy()).float().cuda() / 255.0
         control = torch.stack([control for _ in range(num_samples)], dim=0)
         control = einops.rearrange(control, 'b h w c -> b c h w').clone()
-
-        if seed == -1:
-            seed = random.randint(0, 65535)
-        seed_everything(seed)
 
         cond = {"c_concat": [control],
                 "c_crossattn": [model.get_learned_conditioning([prompt + ', ' + a_prompt] * num_samples)]}
