@@ -231,7 +231,8 @@ class Predictor(BasePredictor):
 
     def scribble_preprocessor(self, image, preprocessor_resolution):
         #detected_map = HEDdetector(resize_image(image, preprocessor_resolution))
-        detected_map = HEDdetector(image)
+        detector = HEDdetector()
+        detected_map = detector(image)
         return detected_map
 
     def seg_preprocessor(self, image, preprocessor_resolution):
