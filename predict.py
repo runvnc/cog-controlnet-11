@@ -7,6 +7,7 @@ import time
 import einops
 import random
 import os
+import imageio
 
 from pytorch_lightning import seed_everything
 from annotator.util import resize_image, HWC3
