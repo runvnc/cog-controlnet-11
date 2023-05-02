@@ -144,7 +144,7 @@ class Predictor(BasePredictor):
 
         detected_map = HWC3(detected_map)
         detected_map = cv2.resize(detected_map, (W, H), interpolation=cv2.INTER_LINEAR)
-
+        num_samples = 1
         control = torch.from_numpy(detected_map.copy()).float().cuda() / 255.0
         control = torch.stack([control for _ in range(1)], dim=0)
         control = einops.rearrange(control, 'b h w c -> b c h w').clone()
