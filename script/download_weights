@@ -18,6 +18,8 @@ MODEL_PATHS = [
     "control_v11u_sd15_tile"
 ]
 
+MODEL_PATHS = ["control_v11p_sd15_scribble"]
+ 
 for model in MODEL_PATHS:
     hf_hub_download(repo_id=REPO, filename="%s.yaml" % model, local_dir='./models')
     hf_hub_download(repo_id=REPO, filename="%s.pth" % model, local_dir='./models')
