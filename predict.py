@@ -171,7 +171,7 @@ class Predictor(BasePredictor):
         output_paths = []
         for i, sample in enumerate(results):
             output_path = f"/tmp/out-{i}.png"
-            sample.save(output_path)
+            imageio.imwrite(output_path, sample)
             output_paths.append(Path(output_path))
         return output_paths
 
